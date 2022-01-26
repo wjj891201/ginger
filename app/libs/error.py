@@ -16,7 +16,7 @@ class APIException(HTTPException):
             self.msg = msg
         super(APIException, self).__init__(msg, None)
 
-    def get_body(self, environ=None):
+    def get_body(self, environ=None, scope=None):
         body = dict(
             msg=self.msg,
             error_code=self.error_code,
@@ -25,7 +25,7 @@ class APIException(HTTPException):
         text = json.dumps(body)
         return text
 
-    def get_headers(self, environ=None):
+    def get_headers(self, environ=None, scope=None):
         """Get a list of headers."""
         return [('Content-Type', 'application/json')]
 
